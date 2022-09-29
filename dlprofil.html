@@ -14,6 +14,16 @@
                 </div>
             </div>
         </a>
+        <a href="#" id="change_pp_btn">
+            <div class="cours file" style="--off: 10ms">
+                <span class="material-symbols-outlined">
+                    edit
+                </span>
+                <div class="cours_topData">
+                    <h3>Modifier votre photo de profil de Pronote+</h3>
+                </div>
+            </div>
+        </a>
     </div>
 </div>
 
@@ -43,7 +53,9 @@
 
 <script>
 
-
+    document.getElementById("change_pp_btn").addEventListener("click", function () {
+        changePic()
+    });
     document.getElementById("img_pp").src = avatar;
     document.getElementById("download_pp_btn").addEventListener("click", function () {
         let fileFormat;
