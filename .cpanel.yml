@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/androne.dev/dlprofil/
+    - export DEPLOYPATH=/home/chni5636/androne.dev/dlprofil/
     - /bin/cp -R . $DEPLOYPATH
