@@ -1,0 +1,20 @@
+{
+	"name": "Télécharger votre photo de profil",
+	"author": "andronedev",
+	"authorDisplayName": "Nicolas Chandelier",
+	"description": "Permet de télécharger votre photo de profil (utile pour avoir sa photo facilement)",
+	"icon": "face_6",
+    "version": "1.0.0",
+	"javascript": [
+        "script.js"
+    ],
+	"css": [],
+	"tabs": [
+		{
+		"name": "Téléch. photo de profil",
+		"icon": "download",
+		"path": "dev.androne.dlprofil",
+		"html": "dlprofil.html"
+		}
+	]
+}

@@ -1,0 +1,104 @@
+<div id="dlprofil">
+    <div class="img_pp_box">
+        <img id="img_pp">
+    </div>
+
+    <div id="dlprofil_actions">
+
+
+
+        <a href="#" id="download_pp_btn">
+            <div class="cours file" style="--off: 10ms">
+                <span class="material-symbols-outlined">
+                    download
+                </span>
+                <div class="cours_topData">
+                    <h3>Télécharger votre photo de profil</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<style>
+    .img_pp_box {
+        margin-top: 10px;
+        width: auto;
+        height: 100%;
+        max-height: 300px;
+        display: flex;
+        justify-content: center;
+
+
+    }
+
+    .img_pp_box img {
+        border-radius: 10px;
+        overflow: hidden;
+
+    }
+
+    #dlprofil_actions {
+        padding: 10px;
+    }
+</style>
+
+
+<script>
+    const imagesFormat = ["jpg", "jpeg", "png", "gif", "bmp", "svg"];
+
+
+    document.getElementById("img_pp").src = avatar;
+    document.getElementById("download_pp_btn").addEventListener("click", function () {
+        let fileFormat;
+        for (let i = 0; i < imagesFormat.length; i++) {
+            if (userEverything.avatar.includes("." + imagesFormat[i])) {
+                fileFormat = imagesFormat[i];
+                break;
+            }
+        }
+        let fileName = "avatar." + fileFormat;
+        let url = "https://api.androne.dev/pronoteplus/dlprofil/cors/?url=" + userEverything.avatar
+
+        fetch(url)
+            .then(res => res.blob())
+            .then(blob => {
+                let a = document.createElement('a');
+                let url = window.URL.createObjectURL(blob);
+                let filename = fileName;
+                a.href = url;
+                a.download = filename;
+                a.click();
+                window.URL.revokeObjectURL(url);
+            });
+    });
+    fetch("https://api.androne.dev/pronoteplus/dlprofil/cors/?url=" + userEverything.avatar).then(res => res.blob())
+        .then(blob => {
+            if (navigator.share && navigator.canShare({ files: [blob] })) {
+                document.getElementById("dlprofil_actions").innerHTML += `
+                <a href="#" id="share_pp_btn">
+                    <div class="cours file" style="--off: 10ms">
+                        <span class="material-symbols-outlined">
+                            share
+                        </span>
+                        <div class="cours_topData">
+                            <h3>Partager votre photo de profil</h3>
+                        </div>
+                    </div>
+                    </a>
+                `
+                document.getElementById("share_pp_btn").addEventListener("click", function () {
+                    navigator.share({
+                        title: "Partage de photo de profil",
+                        text: "Voici ma photo de profil",
+                        url: userEverything.avatar
+                    })
+                })
+
+            } else {
+                console.log("[DLProfil] Ce navigateur ne supporte pas le partage de fichier")
+            }
+        })
+
+
+</script>
