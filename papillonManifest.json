@@ -5,9 +5,7 @@
 	"description": "Permet de télécharger votre photo de profil (utile pour avoir sa photo facilement)",
 	"icon": "face_6",
     "version": "1.0.0",
-	"javascript": [
-        "script.js"
-    ],
+	"javascript": [],
 	"css": [],
 	"tabs": [
 		{

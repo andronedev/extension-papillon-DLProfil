@@ -21,6 +21,11 @@ if (filter_var($url, FILTER_VALIDATE_URL)) {
     // set access control headers
     header('Access-Control-Allow-Origin: *');
     // send image to the client
+    // force download
+    $url = parse_url($url);
+    $filename = basename($url['path']);
+    header('Content-Disposition: attachment; filename="'.$filename.'"');
+
     echo $img;
 }
 ?>

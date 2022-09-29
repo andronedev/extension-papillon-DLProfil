@@ -58,31 +58,13 @@
     });
     document.getElementById("img_pp").src = avatar;
     document.getElementById("download_pp_btn").addEventListener("click", function () {
-        let fileFormat;
-        for (let i = 0; i < imagesFormat.length; i++) {
-            if (userEverything.avatar.includes("." + imagesFormat[i])) {
-                fileFormat = imagesFormat[i];
-                break;
-            }
-        }
-        let fileName = "avatar." + fileFormat;
-        let url = "https://androne.dev/dlprofil/cors.php/?url=" + userEverything.avatar
-
-        fetch(url)
-            .then(res => res.blob())
-            .then(blob => {
-                let a = document.createElement('a');
-                let url = window.URL.createObjectURL(blob);
-                let filename = fileName;
-                a.href = url;
-                a.download = filename;
-                a.click();
-                window.URL.revokeObjectURL(url);
-            });
+        window.open("https://androne.dev/dlprofil/cors.php/?url=" + userEverything.avatar, "_blank");
     });
     fetch("https://androne.dev/dlprofil/cors.php/?url=" + userEverything.avatar).then(res => res.blob())
         .then(blob => {
-            if (navigator.share && navigator.canShare({ files: [blob] })) {
+            //to file object
+            const file = new File([blob], "avatar.png", {type: blob.type});
+            if (navigator.share && navigator.canShare({ files: [file] })) {
                 document.getElementById("dlprofil_actions").innerHTML += `
                 <a href="#" id="share_pp_btn">
                     <div class="cours file" style="--off: 10ms">
@@ -99,7 +81,7 @@
                     navigator.share({
                         title: "Partage de photo de profil",
                         text: "Voici ma photo de profil",
-                        url: userEverything.avatar
+                        files: [file]
                     })
                 })
 
